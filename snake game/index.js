@@ -131,9 +131,11 @@ function resolveKeyboardEvents(keyboardEvent) {
         return;
     }
 
-    keyboardEventCode = keyboardEvent.code;
-    yvelocity = keysMap[keyboardEventCode].yvelocity;
-    xvelocity = keysMap[keyboardEventCode].xvelocity;
+    if (keysMap[keyboardEvent.code]) {
+        keyboardEventCode = keyboardEvent.code;
+        yvelocity = keysMap[keyboardEventCode].yvelocity;
+        xvelocity = keysMap[keyboardEventCode].xvelocity;
+    }
 }
 
 //add keyboard event listener to our body
