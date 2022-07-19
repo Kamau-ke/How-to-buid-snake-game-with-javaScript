@@ -2,9 +2,9 @@ const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 
 let speed = 7;
-let tileCount = 20;
+let tileSize = 20;
+let tileCount = canvas.clientHeight / tileSize;
 
-let tileSize = canvas.clientWidth / tileCount - 2;
 let headX = 10;
 let headY = 10;
 
@@ -85,7 +85,7 @@ function drawSnake() {
     ctx.fillStyle = 'green';
     //loop through our snakeparts array
     snakeParts.forEach(function(part) {
-        ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize)
+        ctx.fillRect(part.x * tileSize, part.y * tileSize, tileSize - 2, tileSize - 2)
     })
 
     //add parts to snake --through push
@@ -95,7 +95,7 @@ function drawSnake() {
     }
 
     ctx.fillStyle = 'orange';
-    ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize)
+    ctx.fillRect(headX * tileSize, headY * tileSize, tileSize - 2, tileSize - 2)
  }
 
  function changeSnakePosition() {
@@ -105,7 +105,7 @@ function drawSnake() {
  
  function drawApple() {
     ctx.fillStyle = 'red';
-    ctx.fillRect(appleX * tileCount, appleY * tileCount, tileSize, tileSize);
+    ctx.fillRect(appleX * tileSize, appleY * tileSize, tileSize, tileSize);
  }
 
  // check for collision and change apple position
