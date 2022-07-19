@@ -36,6 +36,8 @@ function resetGame() {
     headY = 10;
     tailLength = 2;
     speed = 7;
+    appleX = Math.floor(Math.random() * tileCount);
+    appleY = Math.floor(Math.random() * tileCount);
 }
 
 // create game loop-to continously update screen
@@ -77,6 +79,7 @@ function checkGameOver() {
         ctx.fillStyle = 'white';
         ctx.font = '50px verdana';
         ctx.fillText('Game Over!', canvas.clientWidth / 4.5, canvas.clientHeight / 2); //position our text in center
+
         ctx.fillStyle = 'white';
         ctx.font = '20px verdana';
         ctx.fillText('Please Space to start a new game!', canvas.clientWidth / 5.5, canvas.clientHeight - 50); //position our text in center
