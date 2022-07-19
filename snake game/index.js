@@ -9,7 +9,7 @@ let headX = 10;
 let headY = 10;
 
 // array for snake parts
-const snakeParts = [];
+let snakeParts = [];
 let tailLength = 2;
 
 //initialize the speed of snake
@@ -24,12 +24,26 @@ let appleY = Math.floor(Math.random() * tileCount);
 let score = 0;
 let keyboardEventCode = '';
 
+let isGameOver = false;
+
+function resetGame() {
+    snakeParts = [];
+    xvelocity = 0;
+    yvelocity = 0;
+    score = 0;
+    keyboardEventCode = '';
+    headX = 10;
+    headY = 10;
+    tailLength = 2;
+    speed = 7;
+}
+
 // create game loop-to continously update screen
 function drawGame() {
     changeSnakePosition();
     // game over logic
-    let result = isGameOver();
-    if (result) {// if result is true
+    isGameOver = checkGameOver();
+    if (isGameOver) {// if result is true
         return;
     }
 
@@ -43,7 +57,7 @@ function drawGame() {
 }
 
 //Game Over function
-function isGameOver() {
+function checkGameOver() {
     let gameOver = false; 
     //check whether game has started
     if (yvelocity === 0 && xvelocity === 0) {
@@ -62,7 +76,10 @@ function isGameOver() {
     if (gameOver) {
         ctx.fillStyle = 'white';
         ctx.font = '50px verdana';
-        ctx.fillText('Game Over!', canvas.clientWidth / 6.5, canvas.clientHeight / 2); //position our text in center
+        ctx.fillText('Game Over!', canvas.clientWidth / 4.5, canvas.clientHeight / 2); //position our text in center
+        ctx.fillStyle = 'white';
+        ctx.font = '20px verdana';
+        ctx.fillText('Please Space to start a new game!', canvas.clientWidth / 5.5, canvas.clientHeight - 50); //position our text in center
     }
 
     return gameOver; // this will stop execution of drawgame method
@@ -120,6 +137,10 @@ function drawSnake() {
 }
 
 function resolveKeyboardEvents(keyboardEvent) {
+    if (keyboardEvent.code === 'Space' && isGameOver) {
+        resetGame();
+        drawGame();
+    }
     var keysMap = {
         'ArrowUp': {restrictedKeyCode: 'ArrowDown', xvelocity: 0, yvelocity: -1},
         'ArrowDown': {restrictedKeyCode: 'ArrowUp', xvelocity: 0, yvelocity: 1 },
