@@ -172,7 +172,7 @@ function keyDown()
         xvelocity=-1;
     }
     //right
-    if(event.keyCode==48){
+    if(event.keyCode==39){
         if(xvelocity==-1)
         return;
         yvelocity=0;
